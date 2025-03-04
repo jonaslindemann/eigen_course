@@ -53,3 +53,25 @@ target_link_libraries(ex14 Eigen3::Eigen)
 
 add_executable(ex15 src/ex15.cpp)
 target_link_libraries(ex15 Eigen3::Eigen)
+
+add_executable(live_coding src/live_coding.cpp src/calfem_eig.cpp)
+target_link_libraries(live_coding Eigen3::Eigen)
+
+add_executable(matrix1_eig src/matrix1_eig.cpp src/calfem_eig.cpp)
+target_link_libraries(matrix1_eig Eigen3::Eigen)
+
+add_executable(matrix2_eig src/matrix2_eig.cpp src/calfem_eig.cpp)
+target_link_libraries(matrix2_eig Eigen3::Eigen)
+
+add_executable(matrix3_eig src/matrix3_eig.cpp src/calfem_eig.cpp)
+target_link_libraries(matrix3_eig Eigen3::Eigen)
+
+add_executable(matrix4_eig src/matrix4_eig.cpp src/calfem_eig.cpp)
+target_link_libraries(matrix4_eig Eigen3::Eigen)
+
+add_executable(matrix5_eig src/matrix5_eig.cpp src/calfem_eig.cpp)
+target_link_libraries(matrix5_eig Eigen3::Eigen)
+
+add_executable(eigen_c_arrays1 src/eigen_c_arrays1.cpp src/calfem_eig.cpp)
+target_link_libraries(eigen_c_arrays1 Eigen3::Eigen)
+

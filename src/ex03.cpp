@@ -20,7 +20,11 @@ int main()
 
     auto v2 = v1.cwiseAbs().cwiseSqrt();
 
+    auto v2a = v1.array().abs().sqrt();
+
     cout << "v2 = " << v2 << "\n\n";
+
+    cout << "v2a = " << v2a << "\n\n";
 
     auto v3 = v1;
 

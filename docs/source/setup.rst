@@ -200,3 +200,6 @@ This should give the following output:
 
 Windows
 -------
+
+On Windows you have 2 option. The first one is to install the Microsoft Visual Studio IDE and use the Visual Studio Command Prompt. The second option is to use the Windows Subsystem for Linux (WSL). The easiest is probarbly to install WSL and use the Ubuntu distribution. Then the compilers and libraries are installed in the same way as described for Linux.
+
