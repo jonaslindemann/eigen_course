@@ -30,7 +30,6 @@ Eigen::MatrixXd adjustBrightnessContrast(const Eigen::MatrixXd &image, double al
     return result.matrix();
 }
 
-// Function to create a Gaussian kernel
 Eigen::MatrixXd createGaussianKernel(int size, double sigma)
 {
     if (size % 2 == 0)
