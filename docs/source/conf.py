@@ -66,8 +66,8 @@ html_theme_options = {
     'base_url': 'https://project.github.io/project',
 
     # Set the color and the accent color
-    'color_primary': 'blue',
-    'color_accent': 'blue',
+    'color_primary': '000040',
+    'color_accent': '000040',
 
     # Set the repo location to get a badge with stats
     'repo_url': 'https://github.com/jonaslindemann/eigen_course',
