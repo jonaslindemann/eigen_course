@@ -17,8 +17,8 @@ int main()
 
     cout << "A = " << endl << A << endl;
 
-    vector<int> rows = {1, 3, 4};
-    vector<int> cols = {0, 2};
+    vector<Index> rows = {1, 3, 4};
+    vector<Index> cols = {0, 2};
 
     MatrixXd B = A(rows, cols);
 

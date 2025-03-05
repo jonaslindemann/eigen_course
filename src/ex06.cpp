@@ -15,12 +15,12 @@ int main()
 
     cout << "A = " << endl << A << endl;
 
-    Vector3d b; // ColumnVector
+    Vector3d b; // ColumnVector [3 x 1]
     b.setRandom();
 
     cout << "b = " << endl << b << endl;
 
-    cout << "A * b = " << endl << A * b << endl;
+    cout << "A * b = " << endl << A * b << endl; // [3x3][3x1]
 
     return 0;
 }
