@@ -22,7 +22,8 @@ extensions = [
     'sphinx_copybutton',
     'sphinx_design',
     'sphinx_tabs.tabs',
-    'sphinx_design'
+    'sphinx_design',
+    'sphinx_immaterial'
     #'custom_latex_builder'
     ]
 
@@ -47,7 +48,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
+html_theme = 'sphinx_immaterial'
 
 html_show_copyright = True
 
