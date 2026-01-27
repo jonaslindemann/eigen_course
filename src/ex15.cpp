@@ -25,7 +25,7 @@ Eigen::MatrixXd adjustBrightnessContrast(const Eigen::MatrixXd &image, double al
     result = result + beta;
 
     // Clamp values to valid pixel range [0, 1]
-    result = result.min(1.0f).max(0.0f);
+    result = result.max(0.0).min(1.0);
 
     return result.matrix();
 }
@@ -48,7 +48,7 @@ Eigen::MatrixXd createGaussianKernel(int size, double sigma)
         {
             int dx = x - center;
             int dy = y - center;
-            float exponent = -(dx * dx + dy * dy) / (2 * sigma * sigma);
+            double exponent = -(dx * dx + dy * dy) / (2 * sigma * sigma);
             kernel(y, x) = std::exp(exponent) / (2 * std::numbers::pi * sigma * sigma);
             sum += kernel(y, x);
         }
@@ -90,9 +90,12 @@ Eigen::MatrixXd applyGaussianFilter(const Eigen::MatrixXd &image, int kernelSize
 ImageGd copyToImage(const Eigen::MatrixXd &mat)
 {
     ImageGd image;
-    image.resize(mat.rows(), mat.cols());
-    for (int i = 0; i < mat.rows(); i++)
-        for (int j = 0; j < mat.cols(); j++)
+    const int rows = static_cast<int>(mat.rows());
+    const int cols = static_cast<int>(mat.cols());
+    
+    image.resize(rows, cols);
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
             image(i, j) = mat(i, j);
 
     return image;

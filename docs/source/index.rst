@@ -18,4 +18,5 @@ Jonas Lindemann, 2025
    schedule
    links
    exercises
+   solutions
    

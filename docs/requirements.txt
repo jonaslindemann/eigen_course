@@ -1,5 +1,5 @@
-Sphinx >= 7.2
-sphinx-material
+Sphinx >= 8.0
+sphinx-immaterial
 sphinx-design
 sphinx-copybutton
 sphinx-tabs

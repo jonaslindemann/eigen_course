@@ -1,6 +1,14 @@
 Exercises
 =========
 
+Use the button below to open a template in Compiler Explorer with the Eigen library included. You can use this template to complete the exercises below.
+
+.. button-link:: https://godbolt.org/z/M6hfa3Eac
+    :color: primary
+    :outline:
+
+    Open solution in Compiler Explorer
+
 Basic Matrix and Vector operations
 ----------------------------------
 
@@ -12,7 +20,7 @@ Basic Matrix and Vector operations
 **2. Matrix Initialization**
 
 - Create a 3×3 matrix with all elements set to zero.
-- Initialize a 2×4 matrix with specific values of your choice.
+- Initialize a 2×4 matrix with specific values of your choice. 
 - Print both matrices to verify their contents.
  
 **3. Basic Math Functions**
@@ -225,4 +233,7 @@ Practical Applications
 
             return kernel;
         }
+
+
+
 

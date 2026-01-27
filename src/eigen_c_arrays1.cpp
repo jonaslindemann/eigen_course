@@ -1,5 +1,6 @@
 #include <Eigen/Dense>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 using namespace Eigen;
@@ -19,17 +20,15 @@ int main()
     MatrixXd A(10, 10);
     A.setRandom();
 
-    double *data = A.data();
-    double **data2D = new double *[A.rows()];
+    auto data = A.data();
+    
+    auto data2D = make_unique<double*[]>(A.rows());
 
-    for (size_t i = 0; i < A.rows(); i++)
-        data2D[i] = A.row(i).data();
+    for (int i = 0; i < A.rows(); i++)
+        data2D[i] = data + i * A.cols();
 
-    // data2D[i] = const_cast< double * >(A.row(i).data());
-    // data2D[i] = A.row(i).data(); // Could give an overrun warning
-    // data2D[i] = data + i * A.cols();
+    auto rows = static_cast<int>(A.rows());
+    auto cols = static_cast<int>(A.cols());
 
-    foo(data2D, A.rows(), A.cols());
-
-    delete[] data2D;
+    foo(data2D.get(), rows, cols);
 }
