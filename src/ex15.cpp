@@ -1,17 +1,13 @@
-#include <iostream>
 #include <cmath>
 #include <vector>
 #include <numbers>
+#include <print>
 
 #include <Eigen/Dense>
 
+#include "utils_print.h"
+
 #include <img/Image.h>
-
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
-using namespace img;
 
 Eigen::MatrixXd adjustBrightnessContrast(const Eigen::MatrixXd &image, double alpha, double beta)
 {
@@ -87,9 +83,9 @@ Eigen::MatrixXd applyGaussianFilter(const Eigen::MatrixXd &image, int kernelSize
     return result;
 }
 
-ImageGd copyToImage(const Eigen::MatrixXd &mat)
+img::ImageGd copyToImage(const Eigen::MatrixXd &mat)
 {
-    ImageGd image;
+    img::ImageGd image;
     const int rows = static_cast<int>(mat.rows());
     const int cols = static_cast<int>(mat.cols());
     
@@ -103,13 +99,17 @@ ImageGd copyToImage(const Eigen::MatrixXd &mat)
 
 int main()
 {
+    using std::cout;
+    using Eigen::MatrixXd;
+    using img::ImageGd;
+
     ImageGd image;
 
-    cout << "Loading image..." << endl;
+    std::println("Loading image...");
 
     if (!load("images/half-moon-986269.png", image))
     {
-        cout << "Error loading image" << endl;
+        std::println("Error loading image");
         return 1;
     }
 
@@ -117,43 +117,43 @@ int main()
 
     auto mat = image.as_matrix();
 
-    cout << "Adjusting brightness contrast..." << endl;
+    std::println("Adjusting brightness contrast...");
 
     MatrixXd brighterImageMat = adjustBrightnessContrast(mat, 1.0, 0.5);
 
     // Create a new image with the modified data
 
-    cout << "Converting to image..." << endl;
+    std::println("Converting to image...");
 
     auto brighterImage = copyToImage(brighterImageMat);
 
     // Save the new image
 
-    cout << "Saving image..." << endl;
+    std::println("Saving image...");
 
     if (!save("images/brighter-half-moon-986269.png", brighterImage))
     {
-        cout << "Error saving image" << endl;
+        std::println("Error saving image");
         return 1;
     }
 
-    cout << "Applying Gaussian filter..." << endl;
+    std::println("Applying Gaussian filter...");
 
     MatrixXd blurredImageMat = applyGaussianFilter(mat, 10, 1.0);
 
     // Create a new image with the modified data
 
-    cout << "Converting to image..." << endl;
+    std::println("Converting to image...");
 
     auto blurredImage = copyToImage(blurredImageMat);
 
     // Save the new image
 
-    cout << "Saving image..." << endl;
+    std::println("Saving image...");
 
     if (!save("images/blurred-half-moon-986269.png", blurredImage))
     {
-        cout << "Error saving image" << endl;
+        std::println("Error saving image");
         return 1;
     }
 }

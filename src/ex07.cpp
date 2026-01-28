@@ -1,30 +1,34 @@
 #include <iostream>
 #include <cmath>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::Matrix4d;
+    using Eigen::Matrix3d;
+    using Eigen::MatrixXd;
+    using Eigen::FullPivLU;
+    using std::cout;
+
     Matrix4d A;
     A.setRandom();
 
-    cout << "A = " << endl << A << endl;
+    utils::print("A", A);
 
-    cout << "det(A) = " << A.determinant() << endl;
-    cout << "A^(-1) = " << endl << A.inverse() << endl;
-    cout << "A^T = " << endl << A.transpose() << endl;
+    std::println("det(A) = {}", A.determinant());
 
-    cout << "A * A^(-1) = " << endl << A * A.inverse() << endl;
+    utils::print("A^(-1)", A.inverse());
+    utils::print("A^T", A.transpose());
+    utils::print("A * A^(-1)", A * A.inverse());
 
     if ((A * A.inverse()).isIdentity())
-        cout << "A * A^(-1) is identity" << endl;
+        std::println("A * A^(-1) is identity");
     else
-        cout << "A * A^(-1) is not identity" << endl;
+        std::println("A * A^(-1) is not identity");
 
     Matrix3d B;
 
@@ -34,25 +38,16 @@ int main()
     bool isSingular = std::abs(det) < 1e-10;
 
     if (isSingular)
-    {
-        cout << "B is singular" << endl;
-    }
+        std::println("B is singular");
     else
-    {
-        cout << "B is not singular" << endl;
-    }
+        std::println("B is not singular");
 
     FullPivLU<MatrixXd> lu(B);
+
     bool isSingular_lu = !lu.isInvertible();
 
     if (isSingular_lu)
-    {
-        cout << "B is singular (LU)" << endl;
-    }
+        std::println("B is singular (LU)");
     else
-    {
-        cout << "B is not singular (LU)" << endl;
-    }
-
-    return 0;
+        std::println("B is not singular (LU)");
 }

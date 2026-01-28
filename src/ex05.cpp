@@ -1,29 +1,28 @@
 #include <iostream>
 #include <cmath>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::Matrix3d;
+    using std::cout;
+
     Matrix3d A;
     A.setRandom();
 
-    cout << "A = " << endl << A << endl;
+    utils::print("A", A);
 
     Matrix3d B;
     B.setRandom();
 
-    cout << "B = " << endl << B << endl;
+    utils::print("B", B);
 
-    cout << "A + B = " << endl << A + B << endl;
-    cout << "A - B = " << endl << A - B << endl;
-    cout << "A.array() * B.array() = " << endl << A.array() * B.array() << endl;
-    cout << "A * B = " << endl << A * B << endl;
-
-    return 0;
+    utils::print("A + B", A + B);
+    utils::print("A - B", A - B);
+    utils::print("A.array() * B.array()", A.array() * B.array());
+    utils::print("A * B", A * B);
 }

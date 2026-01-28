@@ -1,29 +1,28 @@
 #include <iostream>
 #include <cmath>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::RowVector;
+    using std::cout;
+
     RowVector<double, 10> v1;
     v1.setRandom();
 
-    cout << "v1 = " << v1 << "\n\n";
+    utils::print("v1", v1);
 
     RowVector<double, 10> v2;
     v2.setRandom();
 
-    cout << "v2 = " << v2 << "\n\n";
+    utils::print("v2", v2);
 
-    cout << "v1 + v2 = " << v1 + v2 << "\n\n";
-    cout << "v1 - v2 = " << v1 + v2 << "\n\n";
-    cout << "v1.cwiseProduct(v2) = " << v1.cwiseProduct(v2) << "\n\n";
-    cout << "v1.dot(v2) = " << v1.dot(v2) << "\n\n";
-
-    return 0;
+    utils::print("v1 + v2", v1 + v2);
+    utils::print("v1 - v2", v1 - v2);
+    utils::print("v1.cwiseProduct(v2)", v1.cwiseProduct(v2));
+    std::println("v1.dot(v2) = {}", v1.dot(v2));
 }

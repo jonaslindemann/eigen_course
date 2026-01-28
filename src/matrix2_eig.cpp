@@ -1,45 +1,51 @@
-#include <iostream>
+#include <print>
 #include <Eigen/Dense>
 
-using namespace std;
-using namespace Eigen;
+#include "utils_print.h"
 
 enum TAnalysisType {
     PLANE_STRESS,
     PLANE_STRAIN
 };
 
-MatrixXd hooke(TAnalysisType ptype, double E, double v)
+Eigen::MatrixXd hooke(TAnalysisType ptype, double E, double v)
 {
-    MatrixXd D;
+    Eigen::MatrixXd D;
+
     switch (ptype)
     {
     case PLANE_STRESS:
         D.resize(3, 3);
-        D << 1.0, v, 0.0, v, 1.0, 0.0, 0.0, 0.0, (1.0 - v) * 0.5;
+        D << 1.0, v  , 0.0, 
+             v  , 1.0, 0.0, 
+             0.0, 0.0, (1.0 - v) * 0.5;
         break;
     case PLANE_STRAIN:
         D.resize(4, 4);
-        D << 1.0 - v, v, v, 0.0, v, 1.0 - v, v, 0.0, v, v, 1.0 - v, 0.0, 0.0, 0.0, 0.0, 0.5 * (1.0 - 2 * v);
+        D << 1.0 - v, v  , v  , 0.0, 
+             v  , 1.0 - v, v  , 0.0, 
+             v  , v  , 1.0 - v, 0.0, 
+             0.0, 0.0, 0.0, 0.5 * (1.0 - 2 * v);
         break;
     default:
         break;
     }
 
-    cout << "inside hooke - D = " << D.data() << endl;
+    std::println("inside hooke - D.data() = {}", static_cast<void*>(D.data()));
 
     return D;
 }
 
 int main()
 {
-    MatrixXd Dpstress = hooke(PLANE_STRESS, 2.1e9, 0.35);
-    cout << "outside hooke - Dpstress = " << Dpstress.data() << endl;
-    MatrixXd Dpstrain = hooke(PLANE_STRAIN, 2.1e9, 0.35);
-    cout << "outside hooke - Dpstrain = " << Dpstrain.data() << endl;
+    using Eigen::MatrixXd;
 
-    cout << "D,pstress = " << endl;
-    cout << Dpstress << endl;
-    cout << "D,pstrain = " << endl;
-    cout << Dpstrain << endl;
+    MatrixXd Dpstress = hooke(PLANE_STRESS, 2.1e9, 0.35);
+    std::println("inside main - Dpstress.data() = {}", static_cast<void*>(Dpstress.data()));
+    std::println("outside hooke - Dpstress.data() = {}", static_cast<void*>(Dpstress.data()));
+    MatrixXd Dpstrain = hooke(PLANE_STRAIN, 2.1e9, 0.35);
+    std::println("outside hooke - Dpstrain.data() = {}", static_cast<void*>(Dpstrain.data()));
+
+    utils::print("D,pstress = {}", Dpstress)                    ;
+    utils::print("D,pstrain = {}", Dpstrain)                    ;
 }

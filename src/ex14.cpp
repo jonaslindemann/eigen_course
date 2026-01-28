@@ -1,32 +1,35 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::Matrix3d;
+    using Eigen::SelfAdjointEigenSolver;
+
     Matrix3d A;
 
-    A << 1, 2, 7, 2, 5, 6, 7, 6, 10;
+    A << 1, 2, 7, 
+         2, 5, 6, 
+         7, 6, 10;
 
-    cout << "A = " << endl << A << endl;
+    utils::print("A", A);
 
     SelfAdjointEigenSolver<Eigen::Matrix3d> es(A);
 
     if (es.info() != Eigen::Success)
     {
-        cout << "Eigen solver failed!" << endl;
+        std::println("Eigen solver failed.");
         return 1;
     }
 
-    cout << "The eigenvalues of A are:" << endl << es.eigenvalues() << endl;
-    cout << "The matrix of eigenvectors, V, is:" << endl << es.eigenvectors() << endl;
+    utils::print("The eigenvalues of A are:", es.eigenvalues());
+    utils::print("The matrix of eigenvectors, V, is:", es.eigenvectors());
 
     auto v1 = es.eigenvectors().col(0);
     auto v2 = es.eigenvectors().col(1);
@@ -36,19 +39,19 @@ int main()
     auto lambda2 = es.eigenvalues()(1);
     auto lambda3 = es.eigenvalues()(2);
 
-    cout << "The first eigenvector is:" << endl << v1 << endl;
-    cout << "The second eigenvector is:" << endl << v2 << endl;
-    cout << "The third eigenvector is:" << endl << v3 << endl;
+    utils::print("The first eigenvector is:", v1);
+    utils::print("The second eigenvector is:", v2);
+    utils::print("The third eigenvector is:", v3);
 
-    cout << "The first eigenvalue is:" << endl << lambda1 << endl;
-    cout << "The second eigenvalue is:" << endl << lambda2 << endl;
-    cout << "The third eigenvalue is:" << endl << lambda3 << endl;
+    std::println();
+
+    std::println("The first eigenvalue is: {}", lambda1);
+    std::println("The second eigenvalue is: {}", lambda2);
+    std::println("The third eigenvalue is: {}\n", lambda3);
 
     Matrix3d I = Matrix3d::Identity();
 
-    cout << "(A-lambda1 * I) * v1 = " << endl << (A - lambda1 * I) * v1 << endl;
-    cout << "(A-lambda2 * I) * v2 = " << endl << (A - lambda2 * I) * v2 << endl;
-    cout << "(A-lambda3 * I) * v3 = " << endl << (A - lambda3 * I) * v3 << endl;
-
-    return 0;
+    std::println("(A-lambda1 * I) * v1 = {}", (A - lambda1 * I) * v1);
+    std::println("(A-lambda2 * I) * v2 = {}", (A - lambda2 * I) * v2);
+    std::println("(A-lambda3 * I) * v3 = {}", (A - lambda3 * I) * v3);
 }

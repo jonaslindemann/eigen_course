@@ -1,35 +1,34 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::MatrixXd;
+    using Eigen::VectorXd;
+
     MatrixXd A(10, 10);
 
     A << MatrixXd::Random(10, 10);
 
-    cout << "A = " << endl << A << endl;
+    utils::print("A", A);
 
     VectorXd b(10);
 
     b << VectorXd::Random(10);
 
-    cout << "b = " << endl << b << endl;
+    utils::print("b", b);
 
     VectorXd x = A.fullPivLu().solve(b);
 
-    cout << "The solution is:\n" << x << endl;
+    utils::print("The solution is:", x);
 
-    cout << "The relative error is:\n" << (A * x - b).norm() / b.norm() << endl;
+    std::println("The relative error is: {}", (A * x - b).norm() / b.norm());
 
-    cout << "A * x = " << endl << A * x << endl;
-
-    return 0;
+    std::println("A * x = {}", A * x);
 }

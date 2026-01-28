@@ -1,31 +1,35 @@
 #include <Eigen/Dense>
-#include <iostream>
+#include <print>
 
-using namespace std;
-using namespace Eigen;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::Matrix;
+    using Eigen::Vector;
+    using Eigen::Matrix3d;
+    using Eigen::Matrix3i;
+    using Eigen::Matrix3f;
+    using Eigen::Vector3d;
+    using Eigen::RowVector3d;
+    using Eigen::Dynamic;
+
     Matrix3d A;
 
-    cout << "Here is the matrix A (uninitialised):\n"
-         << A << endl;
+    utils::print("A uninitialised", A);
 
     A.setOnes();
 
-    cout << "Here is the matrix A:\n"
-         << A << endl;
+    utils::print("A after setOnes", A);
 
     Matrix3i B = Matrix3i::Zero();
 
-    cout << "Here is the matrix B:\n"
-         << B << endl;
+    utils::print("B after setZero", B);
 
     Matrix3f C;
     C.setIdentity();
 
-    cout << "Here is the matrix C:\n"
-         << C << endl;
+    utils::print("C after setIdentity", C);
 
     Matrix3d D;
 
@@ -33,15 +37,13 @@ int main()
         4, 5, 6,
         7, 8, 9;
 
-    cout << "Here is the matrix D:\n"
-         << D << endl;
+    utils::print("D after initialization", D);
 
     D.col(0) << 1, 2, 3;
     D.col(1) << 4, 5, 6;
     D.col(2) << 7, 8, 9;
 
-    cout << "Here is the matrix D:\n"
-         << D << endl;
+    utils::print("D after column initialization", D);
 
     Matrix<double, 6, 3> E;
 
@@ -49,8 +51,7 @@ int main()
     E.col(1) << 7, 8, 9, 10, 11, 12;
     E.col(2) << 13, 14, 15, 16, 17, 18;
 
-    cout << "Here is the matrix E:\n"
-         << E << endl;
+    utils::print("E after column initialization", E);
 
     Matrix<int, 3, 6> F;
 
@@ -58,20 +59,17 @@ int main()
     F.row(1) << 7, 8, 9, 10, 11, 12;
     F.row(2) << 13, 14, 15, 16, 17, 18;
 
-    cout << "Here is the matrix F:\n"
-         << F << endl;
+    utils::print("F after row initialization", F);
 
     Vector<double, 3> v;
 
     v << 1, 2, 3;
 
-    cout << "Here is the vector v:\n"
-         << v << endl;
+    utils::print("v after initialization", v);
 
     Vector3d w(1, 2, 3);
 
-    cout << "Here is the vector w:\n"
-         << w << endl;
+    utils::print("w after initialization", w);
 
     Matrix<double, Dynamic, Dynamic> A_dyn(3, 3); // Shorthand for MatrixXd
 
@@ -79,23 +77,19 @@ int main()
         4, 5, 6,
         7, 8, 9;
 
-    cout << "Here is the matrix A_dyn:\n"
-         << A_dyn << endl;
+    utils::print("A_dyn after initialization", A_dyn);
 
     A_dyn.resize(1, 9); // No reallocation
 
-    cout << "Here is the matrix A_dyn after resizing:\n"
-         << A_dyn << endl;
+    utils::print("A_dyn after resizing", A_dyn);
 
     A_dyn.resize(6, 6); // Reallocation.
 
-    cout << "Here is the matrix A_dyn after resizing:\n"
-         << A_dyn << endl;
+    utils::print("A_dyn after resizing", A_dyn);
 
     A_dyn.setZero();
 
-    cout << "Here is the matrix A_dyn after setting to zero:\n"
-         << A_dyn << endl;
+    utils::print("A_dyn after setting to zero", A_dyn);
 
     Matrix<int, Dynamic, 3> B_dyn;
 
@@ -103,16 +97,13 @@ int main()
 
     B_dyn.setRandom();
 
-    cout << "Here is the matrix B_dyn:\n"
-         << B_dyn << endl;
+    utils::print("B_dyn after initialization", B_dyn);
 
     RowVector3d v_row(1.0, 2.0, 3.0);
 
-    cout << "Here is the row vector v_row:\n"
-         << v_row << endl;
+    utils::print("v_row after initialization", v_row);
 
     Vector3d v_col(1.0, 2.0, 3.0);
 
-    cout << "Here is the row vector v_col:\n"
-         << v_col << endl;
+    utils::print("v_col after initialization", v_col);
 }

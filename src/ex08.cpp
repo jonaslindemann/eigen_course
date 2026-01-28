@@ -1,38 +1,42 @@
 #include <iostream>
 #include <cmath>
+#include <print>
 
 #include <Eigen/Dense>
 
-// Just for clarity of the examples.
-
-using namespace Eigen;
-using namespace std;
+#include "utils_print.h"
 
 int main()
 {
+    using Eigen::Matrix4d;
+    using Eigen::MatrixXd;
+    using Eigen::Matrix2d;
+
     Matrix4d A;
 
-    A << 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+    A << 1, 2, 3, 4, 
+         5, 6, 7, 8, 
+         9, 10, 11, 12, 
+         13, 14, 15, 16;
 
-    cout << "A = " << endl << A << endl;
+    utils::print("A = ", A);
 
     MatrixXd B = A.block(0, 0, 2, 2);
 
-    cout << "B = " << endl << B << endl;
+    utils::print("B = ", B);
 
     MatrixXd C = A.block(2, 2, 2, 2);
 
-    cout << "C = " << endl << C << endl;
+    utils::print("C = ", C);
 
     Matrix2d D;
 
-    D << 42, 42, 42, 42;
+    D << 42, 42, 
+         42, 42;
 
-    cout << "D = " << endl << D << endl;
+    utils::print("D = ", D);
 
     A.block(2, 2, 2, 2) = D;
 
-    cout << "A = " << endl << A << endl;
-
-    return 0;
+    utils::print("A = ", A);
 }

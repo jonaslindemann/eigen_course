@@ -1,19 +1,21 @@
-#include <iostream>
 #include <cmath>
 #include <Eigen/Dense>
 #include <set>
 #include <numbers>
+#include <print>
 
+#include "utils_print.h"
 #include "calfem_eig.h"
 
-using namespace std;
-using namespace Eigen;
-
-//constexpr auto PI = 3.14159265358979323846;
 constexpr auto PI = std::numbers::pi;
 
 int main()
 {
+    using Eigen::MatrixXi;
+    using Eigen::MatrixXd;
+    using Eigen::VectorXi;
+    using Eigen::VectorXd;
+
     // Element topology
     
     MatrixXi edof(10,4);
@@ -82,7 +84,7 @@ int main()
 
     // Assemble system
     
-    for (int i=0; i<ex.rows(); i++)
+    for (auto i=0; i<ex.rows(); i++)
     {
         MatrixXd Ke = bar2e(ex.row(i), ey.row(i), ep);
         assem(edof.row(i), K, Ke);
@@ -110,19 +112,16 @@ int main()
     
     // Display results
     
-    cout.precision(11);
-    cout.setf(ios::fixed);
-    
-    cout << "a =" << a << endl;
-    cout << "r =" << r << endl;
+    utils::print("a", a);
+    utils::print("r", r);
     
     // Extract element displacements
     
     MatrixXd ed;
     
     extractEldisp(edof, a, ed);
-    
-    cout << "ed = " << ed << endl;
+
+    utils::print("ed", ed);
     
     // Calculate element forces
     
@@ -131,5 +130,5 @@ int main()
     for (int i=0; i<edof.rows(); i++)
         N(i) = bar2s(ex.row(i), ey.row(i), ep, ed.row(i));
     
-    cout << "N = " << N << endl;
+    utils::print("N", N);
 }
