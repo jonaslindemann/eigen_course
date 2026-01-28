@@ -86,8 +86,8 @@ int main()
     
     for (auto i=0; i<ex.rows(); i++)
     {
-        MatrixXd Ke = bar2e(ex.row(i), ey.row(i), ep);
-        assem(edof.row(i), K, Ke);
+        MatrixXd Ke = calfem::bar2e(ex.row(i), ey.row(i), ep);
+        calfem::assem(edof.row(i), K, Ke);
     }
     
     // Boundary conditions
@@ -108,7 +108,7 @@ int main()
 
     // Solve equation system
     
-    solveq(K, f, bcDofs, bcValues, a, r);
+    calfem::solveq(K, f, bcDofs, bcValues, a, r);
     
     // Display results
     
@@ -119,7 +119,7 @@ int main()
     
     MatrixXd ed;
     
-    extractEldisp(edof, a, ed);
+    calfem::extractEldisp(edof, a, ed);
 
     utils::print("ed", ed);
     
@@ -128,7 +128,7 @@ int main()
     VectorXd N(edof.rows());
     
     for (int i=0; i<edof.rows(); i++)
-        N(i) = bar2s(ex.row(i), ey.row(i), ep, ed.row(i));
+        N(i) = calfem::bar2s(ex.row(i), ey.row(i), ep, ed.row(i));
     
     utils::print("N", N);
 }

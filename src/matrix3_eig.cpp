@@ -16,7 +16,7 @@ int main()
     ey << 0.0, 1.0;
     ep << 1.0, 1.0;
 
-    MatrixXd Ke = bar2e(ex, ey, ep);
+    MatrixXd Ke = calfem::bar2e(ex, ey, ep);
 
     utils::print("Ke", Ke);
 }

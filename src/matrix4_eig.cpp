@@ -20,11 +20,11 @@ int main()
     ep << 1.0, 1.0;
     ed << 0.0, 0.0, 0.01, 0.01;
     
-    MatrixXd Ke = bar2e(ex, ey, ep);
+    MatrixXd Ke = calfem::bar2e(ex, ey, ep);
 
     utils::print("Ke", Ke);
     
-    double N = bar2s(ex, ey, ep, ed);
+    double N = calfem::bar2s(ex, ey, ep, ed);
 
     std::print("N = {}", N);
 }
